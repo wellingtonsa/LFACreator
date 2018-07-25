@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="568.0" prefWidth="902.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.crateus.ufc.lfa.view.HomeController">
+   <children>
+      <Pane fx:id="pDesktop" layoutX="205.0" layoutY="53.0" prefHeight="406.0" prefWidth="626.0" style="-fx-background-color: #ffffff;" />
+      <Pane layoutX="32.0" layoutY="53.0" prefHeight="410.0" prefWidth="127.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <ToggleButton fx:id="tgStates" layoutX="-1.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="Estados">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgOptions" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton fx:id="tgTransition" layoutX="-1.0" layoutY="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="128.0" text="Transiçao" toggleGroup="$tgOptions" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
