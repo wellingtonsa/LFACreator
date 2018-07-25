@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>LFACreator</name>
-	<comment></comment>
+	<comment>Application test for create automata and formal linguage</comment>
 	<projects>
 	</projects>
 	<buildSpec>
