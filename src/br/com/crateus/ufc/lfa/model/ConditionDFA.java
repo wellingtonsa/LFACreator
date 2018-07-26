@@ -4,6 +4,11 @@ public class ConditionDFA {
 
 	private String read;
 
+	public ConditionDFA(String read) {
+		super();
+		this.read = read;
+	}
+
 	public String getRead() {
 		return read;
 	}

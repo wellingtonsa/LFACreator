@@ -3,9 +3,12 @@ package br.com.crateus.ufc.lfa.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.com.crateus.ufc.lfa.model.ConditionDFA;
 import br.com.crateus.ufc.lfa.model.State;
 import br.com.crateus.ufc.lfa.model.TransitionDFA;
 import br.com.crateus.ufc.lfa.repository.AutomatoRepository;
+import br.com.crateus.ufc.lfa.util.ArrowDraw;
+import br.com.crateus.ufc.lfa.util.ConditionDraw;
 import br.com.crateus.ufc.lfa.util.FXMLResources;
 import br.com.crateus.ufc.lfa.util.StateDraw;
 import br.com.crateus.ufc.lfa.util.TransitionDraw;
@@ -36,6 +39,8 @@ public class HomeController extends Application implements Initializable {
 	ToggleButton tgTransition;
 
 	AutomatoRepository ap;
+	ArrowDraw ad;
+	ConditionDraw cd;
 	Circle cStart;
 	Circle cEnd;
 
@@ -73,7 +78,12 @@ public class HomeController extends Application implements Initializable {
 						ap.addState(c, s);
 
 					} else if (tgTransition.isSelected()) {
-						cStart = ap.getStateCircle(event.getX(), event.getY());
+						try {
+							cStart = ap.getStateCircle(event.getX(), event.getY());
+						} catch (NullPointerException e) {
+
+						}
+
 					}
 
 				}
@@ -89,16 +99,39 @@ public class HomeController extends Application implements Initializable {
 					if (tgStates.isSelected()) {
 
 					} else if (tgTransition.isSelected()) {
+						try {
 
-						cEnd = ap.getStateCircle(event.getX(), event.getY());
-						TransitionDraw td = new TransitionDraw(cStart.centerXProperty(), cStart.centerYProperty(),
-								cEnd.centerXProperty(), cEnd.centerYProperty());
-						// TransitionDFA t = new TransitionDFA(origin, destination, condition);
-						pDesktop.getChildren().addAll(td);
-						// ap.addTransition(td, t);
+							double[] arrowShape = new double[] { 0, 0, 10, 20, -10, 20 };
+							cEnd = ap.getStateCircle(event.getX(), event.getY());
+							TransitionDraw td = new TransitionDraw(cStart.centerXProperty(), cStart.centerYProperty(),
+									cEnd.centerXProperty(), cEnd.centerYProperty());
+
+							ad = new ArrowDraw(td, 0.8f, arrowShape);
+							cd = new ConditionDraw(td, 0.6f, "0", arrowShape);
+							ap.addTransition(td, new TransitionDFA(ap.getStateModel(cStart), ap.getStateModel(cEnd),
+									new ConditionDFA("0")));
+							ap.addArrow(ad);
+							ap.addCondition(cd);
+							pDesktop.getChildren().addAll(td, ad, cd);
+
+						} catch (NullPointerException e) {
+
+						}
 
 					}
 
+				}
+
+			}
+		});
+
+		pDesktop.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getButton() == MouseButton.SECONDARY) {
+					ap.arrowsUpdate();
+					ap.conditionUpdate();
 				}
 
 			}
