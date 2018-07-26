@@ -12,7 +12,7 @@ import javafx.scene.shape.StrokeType;
 public class StateDraw extends Circle {
 	public StateDraw(Color color, DoubleProperty x, DoubleProperty y) {
 		super(x.get(), y.get(), 30);
-		setFill(color.deriveColor(1, 1, 1, 0.5));
+		setFill(Color.WHITESMOKE.deriveColor(1, 1, 1, 1));
 		setStroke(color);
 		setStrokeWidth(2);
 		setStrokeType(StrokeType.OUTSIDE);

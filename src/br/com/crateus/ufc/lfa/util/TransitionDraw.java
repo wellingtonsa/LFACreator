@@ -18,7 +18,8 @@ public class TransitionDraw extends Line {
 		setStrokeLineCap(StrokeLineCap.BUTT);
 		setStrokeLineJoin(StrokeLineJoin.ROUND);
 		getStrokeDashArray().setAll(10.0, 5.0);
-
 		setMouseTransparent(true);
+
 	}
+
 }
