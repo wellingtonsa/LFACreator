@@ -79,5 +79,19 @@ public class AutomatoRepository {
 		return null;
 
 	}
+	
+	public void toStringAll() {
+		System.out.println("STATES:");
+		for (Circle c : state.keySet()) {
+			System.out.println(state.get(c).toString());
+		}
+		
+		System.out.println("TRANSITIONS:");
+		for (TransitionDraw td : transition.keySet()) {
+			System.out.println(transition.get(td).toString());
+		}
+		
+		
+	}
 
 }

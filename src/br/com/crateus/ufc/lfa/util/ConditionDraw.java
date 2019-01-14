@@ -52,9 +52,9 @@ public class ConditionDraw extends Label {
 
 		angle = Math.toDegrees(angle);
 
-		double offset = -180;
+		double offset = 0;
 		if (t > 0.5)
-			offset = +180;
+			offset = 0;
 
 		rz.setAngle(angle + offset);
 

@@ -3,6 +3,8 @@ package br.com.crateus.ufc.lfa.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
 import br.com.crateus.ufc.lfa.model.ConditionDFA;
 import br.com.crateus.ufc.lfa.model.State;
 import br.com.crateus.ufc.lfa.model.TransitionDFA;
@@ -43,6 +45,7 @@ public class HomeController extends Application implements Initializable {
 	ConditionDraw cd;
 	Circle cStart;
 	Circle cEnd;
+	private static int qValue = 0;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -73,7 +76,7 @@ public class HomeController extends Application implements Initializable {
 						State s = new State();
 						Circle c = new StateDraw(Color.BLACK, new SimpleDoubleProperty(event.getX()),
 								new SimpleDoubleProperty(event.getY()));
-						s.setName("Qn");
+						s.setName("Q"+qValue++);
 						pDesktop.getChildren().addAll(c);
 						ap.addState(c, s);
 
@@ -107,15 +110,15 @@ public class HomeController extends Application implements Initializable {
 									cEnd.centerXProperty(), cEnd.centerYProperty());
 
 							ad = new ArrowDraw(td, 0.8f, arrowShape);
-							cd = new ConditionDraw(td, 0.6f, "0", arrowShape);
+							cd = new ConditionDraw(td, 0.6f, JOptionPane.showInputDialog(null, "digite a condiçao do estado"), arrowShape);
 							ap.addTransition(td, new TransitionDFA(ap.getStateModel(cStart), ap.getStateModel(cEnd),
-									new ConditionDFA("0")));
+									new ConditionDFA(cd.getText())));
 							ap.addArrow(ad);
 							ap.addCondition(cd);
 							pDesktop.getChildren().addAll(td, ad, cd);
 
 						} catch (NullPointerException e) {
-
+							ap.toStringAll();
 						}
 
 					}
